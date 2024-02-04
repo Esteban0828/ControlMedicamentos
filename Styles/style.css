@@ -1,0 +1,382 @@
+*{
+    overflow-x: hidden;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+body{
+    background-color: #F5F6F8 !important;
+    
+    
+}
+
+section{
+    margin-left: 10% !important;
+    margin-right: 10% !important;
+}
+
+.title{
+    color: #000;    
+    font-family: Inter;
+    font-size: 2.5rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    margin: 10% !important;
+    margin-bottom: 5% !important;
+}
+
+
+
+.grupoCuadros{
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 1.344rem;
+    filter: drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.25));  
+    overflow-x: visible !important;
+}
+
+.cuadro{
+    width: 8.8855rem;
+    height: 8.4375rem;
+    border-radius: 0.896rem;
+    background-color: #E3506A;
+    cursor: pointer;
+}
+
+.cuadro2{
+    width: 8.8855rem;
+    height: 8.4375rem;
+    border-radius: 0.896rem;
+    background-color: #E8677B;
+    cursor: pointer;
+}
+
+.recuadroicono{
+    width: 0px; height: 25px; left: 0%; top: 11px; position: absolute;
+
+    /* position: absolute; */
+
+}
+
+
+.recuadroicono2{
+    width: 28px; height: 50px; left: 55%; top: 11px; position: absolute
+
+    /* position: absolute; */
+
+}
+
+
+.iconoCuadro{
+    width: 1.75rem;
+    height: 1.5625rem;
+    flex-shrink: 0;
+    align-content: start !important;
+    width: 28px; height: 25px; left: 0px; top: -0px; position: absolute;
+}
+
+.textoCuadro{
+    left: 5%; top: 104px; position: absolute; color: #F5F6F8; font-size: 1rem; font-family: Inter; font-weight: 300; line-height: normal; word-wrap: break-word"
+}
+
+.cantidadCuadro{
+    left: 5%; top: 53px; position: absolute; color: #F5F6F8; font-size: 24px; font-family: Inter; font-weight: 700; word-wrap: break-word
+}
+
+.cantidadCuadro2{
+    left: 60%; top: 53px; position: absolute; color: #F5F6F8; font-size: 24px; font-family: Inter; font-weight: 700; word-wrap: break-word
+
+}
+
+.textoCuadro2{
+    left: 60%; top: 104px; position: absolute; color: #F5F6F8; font-size: 1rem; font-family: Inter; font-weight: 300; line-height: normal; word-wrap: break-word"
+}
+
+.subtitle{
+color: #000;
+font-family: Inter;
+font-size: 1rem;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+
+.subtitle2{
+color: #5F6873;
+font-family: Inter;
+font-size: .9rem;
+font-style: bold;
+font-weight: 600;
+line-height: normal;
+float: right;
+}
+
+.tarjetaTransaccion{
+width: 20.4375rem;
+height: 6.5625rem;
+flex-shrink: 0;
+border-radius: 0.89625rem;
+background: #FFFF;
+}
+
+.fotoProducto{
+    width: 1rem;
+    height: 3.0625rem;
+    flex-shrink: 0;
+    border-radius: 0.4rem;
+    background: #D9D9D9;
+}
+
+.fotoProducto2{
+     border-radius: 14.34px;
+    background-color: #d9d9d9;
+    min-height: 71px;
+    max-width: 71px;
+}
+
+.fotoCliente{
+    width: 1rem;
+    height: 3.0625rem;
+    flex-shrink: 0;
+    border-radius: 0.4rem;
+    background: #D9D9D9;
+}
+
+.flecha{
+    width: 1.125rem;
+height: 1.25rem;
+flex-shrink: 0;
+}
+
+.NombreComercialCard{
+    color: #000;
+font-family: Inter;
+font-size: 0.8rem;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+
+.NombreComercialCard2{
+    color: #000;
+font-family: Inter;
+font-size: 0.95rem;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+
+.subtituloCard{
+    color: #5F6873;
+font-family: Inter;
+font-size: 0.75rem;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+
+.subtituloCardProducto{
+    color: #5F6873;
+    font-family: Inter;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    padding-top: 2% !important;
+}
+
+.subtituloCardProducto2{
+    color: #000;
+    font-family: Inter;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    padding-top: 2% !important;
+}
+
+.subtituloCard2{
+    color: #000;
+    font-family: Inter;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.ultimacard{
+    padding-bottom: 12% !important;
+}
+
+/* Place the navbar at the bottom of the page, and make it stick */
+.nav {
+    margin: 0% !important;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 10vh;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    display: flex;
+    
+}
+
+.nav__link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    min-width: 50px;
+    overflow: hidden;
+    white-space: nowrap;
+    font-family: sans-serif;
+    font-size: 13px;
+    color: #444444;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.1s ease-in-out;
+}
+
+/* .nav__link:hover {
+    background-color: #eeeeee;
+}
+
+.nav__link--active {
+    color: #009578;
+} */
+
+.nav__icon {
+    font-size: 18px;
+}
+
+a{
+    text-decoration: none !important;
+}
+
+/* Pagina clientes */
+
+.fotoCliente3{
+    width: 3rem;
+    height: 3.0625rem;
+    flex-shrink: 0;
+    border-radius: 0.4rem;
+    background: #D9D9D9;
+    overflow: visible !important; 
+}
+
+/* Pagina funciones+ */
+
+.btnformulario{
+background-color: #E3506A !important;
+border: none !important;
+
+}
+
+.btntexto{
+    color: #FFF;
+    font-family: Inter;
+    font-size: 0.9rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+input:focus, select:focus, select, input.form-control:focus {
+
+    outline:none !important;
+
+    outline-width: 0 !important;
+
+    box-shadow: none;
+
+    -moz-box-shadow: none;
+
+    -webkit-box-shadow: none;
+
+    border-color: #dee2e6;
+}
+
+/* Pagina NuevoProducto */
+
+.titleMini{
+    color: #000;    
+    font-family: Inter;
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    margin: 10% !important;
+    margin-bottom: 5% !important;
+}
+
+.btnformulario2{
+    background-color: #E3506A !important;
+    border: none !important;
+    width: 121px;
+    height: 48px;
+}
+
+.btntexto2{
+    color: #FFF;
+    font-family: Inter;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+/* Pagina transaction */
+
+.titleMini2{
+    color: #000;    
+    font-family: Inter;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    margin: 10% !important;
+    margin-bottom: 5% !important;
+}
+
+.btnformulario3{
+    background-color: #E3506A !important;
+    border: none !important;
+    width: 90px;
+    height: 38px;
+}
+
+.btntexto3{
+    color: #FFF;
+    font-family: Inter;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.subtitle3{
+    color: #5F6873;
+font-family: Inter;
+font-size: .8rem;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+float: right;
+}
+
+.subtitle4{
+    color: #000000;
+    font-family: Inter;
+    font-size: .8rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    
+}
