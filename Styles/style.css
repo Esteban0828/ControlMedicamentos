@@ -288,19 +288,19 @@ border: none !important;
     line-height: normal;
 }
 
-input:focus, select:focus, select, input.form-control:focus {
+input:focus, select:focus, select, input.form-control:focus, input.form-select:focus {
 
     outline:none !important;
 
     outline-width: 0 !important;
 
-    box-shadow: none;
+    box-shadow: none !important;
 
-    -moz-box-shadow: none;
+    -moz-box-shadow: none !important;
 
-    -webkit-box-shadow: none;
+    -webkit-box-shadow: none !important;
 
-    border-color: #dee2e6;
+    border-color: #dee2e6 !important;
 }
 
 /* Pagina NuevoProducto */
