@@ -380,3 +380,11 @@ float: right;
     line-height: normal;
     
 }
+
+div:where(.swal2-icon){
+    overflow: hidden;
+}
+
+.swal2-title{
+    overflow: hidden;
+}
