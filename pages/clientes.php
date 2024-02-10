@@ -22,7 +22,7 @@
     $id_cliente = $cliente['Cli_ID']; // Ajusta el nombre del campo según la estructura de tu tabla
 
     // Construir la URL del enlace con el ID del cliente
-    $url = "./vistas/vistaCliente.html?id=" . $id_cliente;
+    $url = "./vistas/vistaCliente.php?id=" . $id_cliente;
       ?>
           <a href="<?php echo $url; ?>" class="text-decoration-none">
               <div class="card mb-3" style="width: 100%;">
@@ -42,7 +42,7 @@
       <?php 
       }
       ?>
-      <a href="./vistas/vistaCliente.html" class="text-decoration-none">
+      <!-- <a href="./vistas/vistaCliente.html" class="text-decoration-none">
         <div class="card mb-3" style="width: 100%;">
             <div class="ms-2 mt-1 mb-1">
                 <div class="row align-items-center ps-0 pt-1 pe-0 pb-1">
@@ -55,7 +55,7 @@
                 </div>
             </div>
         </div>
-    </a>
+    </a> -->
     
       
     </section>

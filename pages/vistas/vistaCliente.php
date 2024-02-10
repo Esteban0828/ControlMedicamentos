@@ -1,31 +1,34 @@
+<?php include_once('Components/ObtenerCliente.php')?>
+<?php include_once('Components/ObtenerTransaccionesPorCliente.php')?>
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedControl</title>
-    <script src="https://kit.fontawesome.com/90b70c7a3b.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/Styles/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-<style>
-    /* Ajustar el tamaño del contenedor principal */
-    .swal2-popup {
-        width: 90vw; /* Ajusta el ancho según tus necesidades */
-        height: 50vh;
-    }
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MedControl</title>
+        <script src="https://kit.fontawesome.com/90b70c7a3b.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/Styles/style.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <style>
+            /* Ajustar el tamaño del contenedor principal */
+            .swal2-popup {
+                width: 90vw; /* Ajusta el ancho según tus necesidades */
+                height: 50vh;
+            }
+            
+            /* Ajustar el tamaño del contenido dentro de la alerta */
+            .swal2-content {
+                font-size: 14px; /* Ajusta el tamaño de la fuente según tus necesidades */
+            }
 
-    /* Ajustar el tamaño del contenido dentro de la alerta */
-    .swal2-content {
-        font-size: 14px; /* Ajusta el tamaño de la fuente según tus necesidades */
-    }
-
-    .icono-flecha {
-        color: #000000;
-        font-size: 1.7em;
-        overflow: hidden;
-    }
-</style>
+            .icono-flecha {
+                color: #000000;
+                font-size: 1.7em;
+                overflow: hidden;
+            }
+        </style>
 </head>
 <body class="">
     <section>
@@ -50,7 +53,7 @@
     <section>
         <div class="row align-items-center">
             <div class="col text-center">
-                <p class="subtitle">Nombre + ApellidoP + ApellidoM</p>
+                <p class="subtitle"><?php echo $cliente['Nombre'].' '. $cliente['ApellidoPaterno'].' '. $cliente['ApellidoMaterno']; ?></p>
             </div>
         </div>
         
@@ -60,6 +63,9 @@
 
     <section class="mt-0">
         <h5 class="subtitle">Transacciones</h5>
+       <?php if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        ?>
         <div class="card" style="width: 100%;">
             <div class="ms-3">
               <div class="row align-items-center  p-3">
@@ -74,13 +80,19 @@
                     </div>
                 </div>
                 <div class="col">
-                    <h6 class="NombreComercialCard mb-0">NombreComercial</h6>
-                    <p class="subtituloCard m-0">Fecha</p>
-                    <p class="subtituloCard2 m-0">9 pzs.</p>
+                    <h6 class="NombreComercialCard mb-0"><?php echo $row['NombreProducto']; ?></h6>
+                    <p class="subtituloCard m-0"><?php echo $row['Fecha']; ?></p>
+                    <p class="subtituloCard2 m-0"><?php echo $row['Cantidad']; ?> pzs.</p>
                 </div>
               </div>
             </div>
           </div>
+        <?php
+    }
+} else {
+    // Si no hay resultados, imprimir un mensaje indicando que no hay transacciones
+    echo "<p class='subtitle5'>No hay transacciones para este cliente.</p>";
+} ?>
     </section>
     
     

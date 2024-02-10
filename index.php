@@ -16,7 +16,7 @@
     
     <section class="pb-4 pe-3 ps-3">
         <div class="row align-items-center grupoCuadros mt-3 g-0 ">
-            <a href="./pages/transacciones.html" class="col cuadro">
+            <a href="./pages/transacciones.php" class="col cuadro">
                     <div class="row">
                         <div class="recuadroicono mt-2 ms-3">
                                 <svg class="iconoCuadro" xmlns="http://www.w3.org/2000/svg" width="28" height="25" viewBox="0 0 28 25" fill="none">
@@ -38,7 +38,7 @@
                             <span>Transacciones</span>
                         </div>
             </a>
-            <a href="./pages/clientes.html" class="col cuadro2">
+            <a href="./pages/clientes.php" class="col cuadro2">
                 <div class="row">
                     <div class="recuadroicono2">
                         <svg class="iconoCuadro  mt-2 ms-3" xmlns="http://www.w3.org/2000/svg" width="32" height="25" viewBox="0 0 32 25" fill="none">
