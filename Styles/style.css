@@ -212,6 +212,16 @@ line-height: normal;
 
 .ultimacard{
     padding-bottom: 12% !important;
+    
+}
+
+.ultimacard2{
+    padding-bottom: 12% !important;
+    padding-top: 30% !important;
+}
+
+.header{
+    background-color: #F5F6F8;
 }
 
 /* Place the navbar at the bottom of the page, and make it stick */
@@ -270,6 +280,17 @@ a{
     background: #D9D9D9;
     overflow: visible !important; 
 }
+
+.fotoCliente4{
+    width: 3rem;
+    height: 3.0625rem;
+    flex-shrink: 0;
+    border-radius: 0.4rem;
+    background: #D9D9D9;
+    object-fit: cover;
+    
+}
+
 
 /* Pagina funciones+ */
 
@@ -382,13 +403,12 @@ float: right;
 }
 
 .subtitle5{
-    color: #000000;
+    color: #5F6873;
 font-family: Inter;
 font-size: .8rem;
 font-style: normal;
-font-weight: 400;
+font-weight: 500;
 line-height: normal;
-float: right;
 }
 
 div:where(.swal2-icon){
@@ -397,4 +417,11 @@ div:where(.swal2-icon){
 
 .swal2-title{
     overflow: hidden;
+}
+
+
+.imagenUsuario {
+    width: 100%; /* La imagen ocupa todo el ancho del contenedor */
+    height: 35vh !important; /* La imagen ocupa todo el alto del contenedor */
+    object-fit: cover; /* La imagen se ajusta para cubrir completamente el contenedor */
 }

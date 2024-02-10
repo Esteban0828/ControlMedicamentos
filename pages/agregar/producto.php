@@ -48,7 +48,7 @@
     
     <section class="pt-4">
        
-        <form action="" >
+        <form action="/Components/RegistrarProducto.php" method="post" enctype="multipart/form-data">
             <div class="mb-2">
                 <label for="NombreComercial" class="mb-0"> <h6 class="NombreComercialCard2">Nombre Comercial</h6></label>
                 <input type="text" class="form-control" name="NombreComercial" id="NombreComercial">
@@ -66,9 +66,15 @@
                     <label for="Funcion" class="mb-0"> <h6 class="NombreComercialCard2">Función</h6></label>
                     <select class="form-select" id="Funcion">
                         <option selected>Seleccionar</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <?php 
+                        include('Components/ObtenerFunciones.php');
+                        foreach($Funciones as $Funcion){
+
+                            echo '<option value="'.$Funcion["Fun_ID"].'">'.$Funcion["Nombre"].'</option>';
+
+
+
+                        } ?>
                     </select>                
                 </div>
                 <div class="col">

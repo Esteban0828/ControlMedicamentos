@@ -13,10 +13,15 @@ if ($conn->connect_error) {
 }
 
 // Obtener los datos del formulario
-$nombre = $_POST['Nombre'];
-$apellidoP = $_POST['ApellidoP'];
-$apellidoM= $_POST['ApellidoM'];
-//  $imagen= $_POST['Imagen'];
+$PrincipioActivo = $_POST['PrincipioActivo'];
+$NombreComercial = $_POST['NombreComercial'];
+$Laboratorio= $_POST['Laboratorio'];
+$Funcion= $_POST['Funcion'];
+$Caducidad= $_POST['Caducidad'];
+$Gramaje= $_POST['Gramaje'];
+$Existencia= $_POST['Cantidad'];
+$Anaquel= $_POST['Anaquel'];
+
 
 // Preparar la consulta SQL para insertar el cliente en la base de datos
 $sql = "";
@@ -44,16 +49,15 @@ if (isset($archivo) && $archivo != "") {
             // echo '<p><img src="../images/'.$archivo.'"></p>';
             $imagen= "/images/$archivo";
             // Preparar la consulta SQL para insertar el cliente en la base de datos
-            $sql = "INSERT INTO Clientes (Nombre, ApellidoPaterno, ApellidoMaterno, Imagen) VALUES ('$nombre', '$apellidoP', '$apellidoM','$imagen')";
+            $sql = "INSERT INTO Medicamentos (PrincipioActivo, NombreComercial, Laboratorio, Funcion, Caducidad, Imagen, Gramaje, Existencia, Anaquel) VALUES ('$PrincipioActivo', '$NombreComercial', '$Laboratorio','$Funcion','$Caducidad','$imagen','$Gramaje','$Existencia','$Anaquel')";
         } else {
             //Si no se ha podido subir la imagen, mostramos un mensaje de error
             echo '<div><b>Ocurrió algún error al subir el fichero. No pudo guardarse.</b></div>';
         }
     }
 }else{
-    $imagen = "/images/Unknown_person.jpg";
-    $sql = "INSERT INTO Clientes (Nombre, ApellidoPaterno, ApellidoMaterno, Imagen) VALUES ('$nombre', '$apellidoP', '$apellidoM','$imagen')";
-
+    $imagen = "/images/Unkwon_Pills.jpg";
+    $sql = "INSERT INTO Medicamentos (PrincipioActivo, NombreComercial, Laboratorio, Funcion, Caducidad, Imagen, Gramaje, Existencia, Anaquel) VALUES ('$PrincipioActivo', '$NombreComercial', '$Laboratorio','$Funcion','$Caducidad','$imagen','$Gramaje','$Existencia','$Anaquel')";
 }
 
 // Ejecutar la consulta y verificar si fue exitosa

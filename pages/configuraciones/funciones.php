@@ -1,33 +1,34 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedControl</title>
-    <link rel="stylesheet" href="/Styles/style.css">
-    <script src="https://kit.fontawesome.com/90b70c7a3b.js" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
-    <style>
-        /* Ajustar el tamaño del contenedor principal */
-        .swal2-popup {
-            width: 90vw; /* Ajusta el ancho según tus necesidades */
-            height: 50vh;
-        }
-    
-        /* Ajustar el tamaño del contenido dentro de la alerta */
-        .swal2-content {
-            font-size: 14px; /* Ajusta el tamaño de la fuente según tus necesidades */
-        }
-
-        .icono-flecha {
-            color: #000000;
-            font-size: 2em;
-            overflow: hidden;
-        }
-    </style>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MedControl</title>
+        <link rel="stylesheet" href="/Styles/style.css">
+        <script src="https://kit.fontawesome.com/90b70c7a3b.js" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        
+        <style>
+            /* Ajustar el tamaño del contenedor principal */
+            .swal2-popup {
+                width: 90vw; /* Ajusta el ancho según tus necesidades */
+                height: 50vh;
+            }
+            
+            /* Ajustar el tamaño del contenido dentro de la alerta */
+            .swal2-content {
+                font-size: 14px; /* Ajusta el tamaño de la fuente según tus necesidades */
+            }
+            
+            .icono-flecha {
+                color: #000000;
+                font-size: 2em;
+                overflow: hidden;
+            }
+            </style>
 
 </head>
 <body class="">
@@ -44,41 +45,42 @@
         </div>
     </section>
     
-
+    
     
     <section class="pt-4">
         <label for="inputFuncion" class="mb-0">
             <h6 class="NombreComercialCard2">Agregar Función</h6>
         </label>
-        <form action="" class="text-end">
-            <div class="mb-2">
-               
-                <input type="text" class="form-control" name="funcion" id="funcion" placeholder="Nombre de la función">
-            </div>
-            <button type="submit" class="btn btn-primary btnformulario rounded-pill ">
-                <p class="btntexto m-0 p-0">Añadir</p>
-            </button>
-        </form>
-        
-        
-        
-      
-    </section>
+    <form action="/Components/RegistrarFuncion.php" method="post" class="text-end">
+        <div class="mb-2">
+            
+            <input type="text" class="form-control" name="funcion" id="funcion" placeholder="Nombre de la función">
+        </div>
+        <button type="submit" class="btn btn-primary btnformulario rounded-pill ">
+            <p class="btntexto m-0 p-0">Añadir</p>
+        </button>
+    </form>
+    
+    
+    
+    
+</section>
 
-    <section class="ui-content pt-5">
-        <ul class="list-group" data-role="listview">
+<section class="ui-content pt-5">
+    <ul class="list-group" data-role="listview">
+        
+        <?php include('Components/ObtenerFunciones.php') ?>
+        <?php foreach ($Funciones as $Funcion) {
+
+        // Obtener el ID del cliente
+        $id_Funcion = $Funcion['Fun_ID']; // Ajusta el nombre del campo según la estructura de tu tabla ?>
+
             <li class="list-group-item d-flex justify-content-between align-items-center mb-2 rounded-top rounded-bottom">
-                <p class="p-0 m-0 NombreComercialCard2">Función 1</p>
-                <i class="fa-solid fa-trash" style="color: #e8677b;" onclick="return showSweetAlert('Función 1')"></i>
+            <p class="p-0 m-0 NombreComercialCard2"><?php echo $Funcion['Nombre'];?></p>
+            <i class="fa-solid fa-trash" style="color: #e8677b;" onclick="return showSweetAlert('<?php echo $Funcion['Nombre'] ?>')"></i>
             </li>
-            <li class="border-top list-group-item d-flex justify-content-between align-items-center mb-2 rounded-top  rounded-bottom">
-                <p class="p-0 m-0 NombreComercialCard2">Función 2</p>
-                <i class="fa-solid fa-trash" style="color: #e8677b;" onclick="return showSweetAlert('Función 2')"></i>
-            </li>
-            <li class="border-top list-group-item d-flex justify-content-between align-items-center mb-2 rounded-top  rounded-bottom">
-                <p class="p-0 m-0 NombreComercialCard2">Función 3</p>
-                <i class="fa-solid fa-trash" style="color: #e8677b;" onclick="return showSweetAlert('Función 3')"></i>
-            </li>
+
+            <?php }; ?>
         </ul>
     </section>
     

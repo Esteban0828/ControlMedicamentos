@@ -45,8 +45,8 @@
     </section>
     
     <section>
-        <div class="container pb-3">
-            <img class="" style="width: 50vh;" src="/img/persona.jpg" alt="">
+        <div class="container pb-3 contenedor-imagen">
+            <img class="imagenUsuario"  src="<?php echo $cliente['Imagen']; ?>" alt="">
         </div>
     </section>
 

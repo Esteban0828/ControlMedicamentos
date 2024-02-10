@@ -9,10 +9,13 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
 <body class="">
-    <h1 class="title">Clientes</h1>
+    <div class="header fixed-top ">
+        <h1 class="title">Clientes</h1>
+
+    </div>
 
     
-    <section class="mt-4 ultimacard mb-2">
+    <section class="mt-1 ultimacard2 mb-2">
 
     <?php 
     include('../Components/ObtenerClientes.php');
@@ -29,7 +32,7 @@
                   <div class="ms-2 mt-1 mb-1">
                       <div class="row align-items-center ps-0 pt-1 pe-0 pb-1">
                           <div class="col-3 pe-0 ps-0">
-                              <div class="fotoCliente3 ms-3 ps-0"></div>
+                              <div class="fotoCliente3 ms-3 ps-0"> <img class="fotoCliente4" src="<?php echo $cliente['Imagen']; ?>" alt=""> </div>
                           </div>
                           <div class="col-9 mb-0 ms-0 ps-0">
                               <!-- Imprime el nombre completo del cliente -->
