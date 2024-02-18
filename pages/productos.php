@@ -15,23 +15,30 @@
     
     <section class="mt-4 ultimacard mb-5">
 
-        <a href="/pages/vistas/vistaProducto.html" class="text-decoration-none">
-          <div class="card mb-3" style="width: 100%;">
-              <div class="ms-3">
-                  <div class="row align-items-center ps-1 pt-3 pe-1 pb-3">
-                      <div class="col-4 col-md-1 pe-0">
-                          <div class="fotoProducto2 pe-0"></div>
-                      </div>
-                      <div class="col-8 col-md ps-0">
-                        <h6 class="NombreComercialCard2 mb-0">NombreComercial</h6>
-                        <p class="subtituloCardProducto m-0">PrincipioActivo  |  Laboratorio</p>
-                        <p class="subtituloCardProducto m-0">Caducidad  |  Anaquel A1</p>
-                        <p class="subtituloCardProducto2 m-0">9 pzs.</p>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </a>
+        <?php include('../Components/ObtenerProductos.php'); ?>
+
+        <?php foreach ($Productos as $Producto) { ?>
+    <a href="/pages/vistas/vistaProducto.html" class="text-decoration-none">
+        <div class="card mb-3" style="width: 100%;">
+            <div class="ms-3">
+                <div class="row align-items-center ps-1 pt-3 pe-1 pb-3">
+                    <div class="col-4 col-md-1 pe-0">
+                        <div class=" pe-0">
+                          <img class="fotoProducto2" src="<?php echo $Producto['Imagen']; ?>" alt="">
+                        </div>
+                    </div>
+                    <div class="col-8 col-md ps-0">
+                        <h6 class="NombreComercialCard2 mb-0"><?php echo $Producto['NombreComercial']; ?></h6>
+                        <p class="subtituloCardProducto m-0"><?php echo $Producto['PrincipioActivo']; ?> | <?php echo $Producto['Laboratorio']; ?></p>
+                        <p class="subtituloCardProducto m-0"><?php echo $Producto['Caducidad']; ?> | <?php echo $Producto['Anaquel']; ?></p>
+                        <p class="subtituloCardProducto2 m-0"><?php echo $Producto['Existencia']; ?> pzs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+<?php } ?>
+
       
 
     </section>

@@ -97,7 +97,7 @@
             <h5 class="subtitle">Productos</h5>
           </div>
           <div class="col">
-            <h5 class="subtitle2"><a class="subtitle2" href="./pages/productos.html">Ver todos</a></h5>
+            <h5 class="subtitle2"><a class="subtitle2" href="./pages/productos.php">Ver todos</a></h5>
           </div>
         </div>
 
@@ -176,6 +176,19 @@
                 icon: 'success',
                 title: '¡Registro exitoso!',
                 text: 'El cliente se ha registrado correctamente.',
+                showConfirmButton: false,
+                 timer: 2500 // Cerrar automáticamente después de 3 segundos
+            });
+        }
+
+        // Verificar si el parámetro 'registro_producto' está presente en la URL
+        var registroExitoso = getParameterByName('registro_producto');
+        if (registroExitoso === 'true') {
+            // Mostrar una alerta de SweetAlert
+            Swal.fire({
+                icon: 'success',
+                title: '¡Registro exitoso!',
+                text: 'El producto se ha registrado correctamente.',
                 showConfirmButton: false,
                  timer: 2500 // Cerrar automáticamente después de 3 segundos
             });

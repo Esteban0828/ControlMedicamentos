@@ -64,16 +64,12 @@
             <div class="row mb-2">
                 <div class="col">
                     <label for="Funcion" class="mb-0"> <h6 class="NombreComercialCard2">Función</h6></label>
-                    <select class="form-select" id="Funcion">
+                    <select class="form-select" name="Funcion">
                         <option selected>Seleccionar</option>
                         <?php 
                         include('Components/ObtenerFunciones.php');
                         foreach($Funciones as $Funcion){
-
                             echo '<option value="'.$Funcion["Fun_ID"].'">'.$Funcion["Nombre"].'</option>';
-
-
-
                         } ?>
                     </select>                
                 </div>

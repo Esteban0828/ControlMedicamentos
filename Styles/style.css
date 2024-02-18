@@ -138,6 +138,8 @@ background: #FFFF;
     background-color: #d9d9d9;
     min-height: 71px;
     max-width: 71px;
+    object-fit: cover; 
+    
 }
 
 .fotoCliente{

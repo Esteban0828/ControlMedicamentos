@@ -51,7 +51,7 @@ if (isset($archivo) && $archivo != "") {
         }
     }
 }else{
-    $imagen = "/images/Unknown_person.jpg";
+    $imagen = "../images/Persona.jpg";
     $sql = "INSERT INTO Clientes (Nombre, ApellidoPaterno, ApellidoMaterno, Imagen) VALUES ('$nombre', '$apellidoP', '$apellidoM','$imagen')";
 
 }

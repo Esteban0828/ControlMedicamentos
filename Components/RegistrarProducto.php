@@ -4,6 +4,11 @@ $servername = "sql5.freemysqlhosting.net";
 $username = "sql5682245";
 $password = "QU5YmpaNqv";
 $database = "sql5682245";
+
+// $servername = "sql300.infinityfree.com";
+// $username = "if0_35963147";
+// $password = "qZINsYHXj4gi";
+// $database = "if0_35963147_sql5682245";
 // Establecemos una conexión con el servidor MySQL
 $conn = new mysqli($servername, $username, $password, $database);
 
@@ -62,11 +67,11 @@ if (isset($archivo) && $archivo != "") {
 
 // Ejecutar la consulta y verificar si fue exitosa
 if ($sql != "" && $conn->query($sql) === TRUE) {
-    echo "Cliente registrado exitosamente";
-    header("Location: /index.php?registro_exitoso=true");
+    echo "Producto registrado exitosamente";
+    header("Location: /index.php?registro_producto=true");
     exit();
 } elseif ($sql != "") {
-    echo "Error al registrar el cliente: " . $conn->error;
+    echo "Error al registrar el producto: " . $conn->error;
 }
 
 // Cerrar la conexión
