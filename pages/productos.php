@@ -9,16 +9,77 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     
 </head>
+<style>
+  .group {
+ display: flex;
+ line-height: 28px;
+ align-items: center;
+ position: relative;
+ max-width: 100%;
+  }
+
+  .input {
+  width: 100%;
+  height: 40px;
+  line-height: 28px;
+  padding: 0 1rem;
+  padding-left: 2.5rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  outline: none;
+  background-color: #e8e8e8;
+  color: #0d0c22;
+  transition: .3s ease;
+  }
+
+  .input::placeholder {
+  color: #9e9ea7;
+  }
+
+  .input:focus, input:hover {
+  outline: none !important;
+  border-color: rgba(234,76,137,0.4);
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgb(234 76 137 / 10%);
+  }
+
+  .icon {
+  position: absolute;
+  left: 1rem;
+  fill: #9e9ea7;
+  width: 1rem;
+  height: 1rem;
+  }
+
+</style>
 <body class="">
     <h1 class="title">Productos</h1>
 
-    
+
+    <section>
+      <div class="row">
+        <div class="col-12">
+
+          <div class="group">
+          <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><g><path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path></g></svg>
+          <input placeholder="Buscar" type="search" class="input">
+        </div>
+        </div>
+      </div>
+    </section>
+
+
+
     <section class="mt-4 ultimacard mb-5">
 
         <?php include('../Components/ObtenerProductos.php'); ?>
 
-        <?php foreach ($Productos as $Producto) { ?>
-    <a href="/pages/vistas/vistaProducto.html" class="text-decoration-none">
+        <?php foreach ($Productos as $Producto) { 
+              $id_Producto = $Producto['Med_ID']; // Ajusta el nombre del campo según la estructura de tu tabla
+              $url = "./vistas/vistaProducto.php?id=" . $id_Producto;
+        ?>
+          
+    <a href="<?php echo $url; ?>" class="text-decoration-none">
         <div class="card mb-3" style="width: 100%;">
             <div class="ms-3">
                 <div class="row align-items-center ps-1 pt-3 pe-1 pb-3">
@@ -27,10 +88,16 @@
                           <img class="fotoProducto2" src="<?php echo $Producto['Imagen']; ?>" alt="">
                         </div>
                     </div>
+                    <?php
+                            $nombreComercial = strlen($Producto['NombreComercial']) > 18 ? substr($Producto['NombreComercial'], 0, 18) . '...' : $Producto['NombreComercial'];
+                            $PrincipioActivo = strlen($Producto['PrincipioActivo']) > 10 ? substr($Producto['PrincipioActivo'], 0, 10) . '...' : $Producto['PrincipioActivo'];
+                            $Laboratorio = strlen($Producto['Laboratorio']) > 26 ? substr($Producto['Laboratorio'], 0, 26) . '...' : $Producto['Laboratorio'];
+                            $fechaCaducidad = date('d-m-Y', strtotime($Producto['Caducidad']));
+                    ?>
                     <div class="col-8 col-md ps-0">
-                        <h6 class="NombreComercialCard2 mb-0"><?php echo $Producto['NombreComercial']; ?></h6>
-                        <p class="subtituloCardProducto m-0"><?php echo $Producto['PrincipioActivo']; ?> | <?php echo $Producto['Laboratorio']; ?></p>
-                        <p class="subtituloCardProducto m-0"><?php echo $Producto['Caducidad']; ?> | <?php echo $Producto['Anaquel']; ?></p>
+                        <h6 class="NombreComercialCard2 mb-0"><?php echo $nombreComercial; ?></h6>
+                        <p class="subtituloCardProducto m-0"><?php echo $Laboratorio; ?></p>
+                        <p class="subtituloCardProducto m-0"><?php echo $fechaCaducidad; ?> | <?php echo $Producto['Anaquel']; ?></p>
                         <p class="subtituloCardProducto2 m-0"><?php echo $Producto['Existencia']; ?> pzs.</p>
                     </div>
                 </div>

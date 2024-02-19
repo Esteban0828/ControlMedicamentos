@@ -427,3 +427,18 @@ div:where(.swal2-icon){
     height: 35vh !important; /* La imagen ocupa todo el alto del contenedor */
     object-fit: cover; /* La imagen se ajusta para cubrir completamente el contenedor */
 }
+
+.imgProducto{
+    object-fit: cover !important;
+    width: 100%;
+    height: 35vh;
+}
+
+.controlCant{
+    background-color: #E8677B !important;
+    color: #FFF !important;
+    border: none !important;
+    font-weight: bolder !important;
+    width: 8.5vw;
+}
+

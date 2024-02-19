@@ -54,7 +54,7 @@
     <form action="/Components/RegistrarFuncion.php" method="post" class="text-end">
         <div class="mb-2">
             
-            <input type="text" class="form-control" name="funcion" id="funcion" placeholder="Nombre de la función">
+            <input type="text" class="form-control" name="funcion" id="funcion" placeholder="Nombre de la función" required>
         </div>
         <button type="submit" class="btn btn-primary btnformulario rounded-pill ">
             <p class="btntexto m-0 p-0">Añadir</p>

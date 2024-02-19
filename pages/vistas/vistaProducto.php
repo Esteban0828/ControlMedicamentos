@@ -1,3 +1,6 @@
+<?php include_once('Components/ObtenerProducto.php')?>
+<!-- <?php include_once('Components/ObtenerTransaccionesPorProducto.php')?> -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,49 +39,50 @@
                 </a>
             </div>
             <div class="col">
-                <h1 class="titleMini2 ms-0">NombreComercial</h1>
+                <h1 class="titleMini2 ms-0"><?php echo $Producto['NombreComercial']; ?></h1>
             </div>
         </div>
     </section>
     
     <section>
         <div class="container pb-3">
-            <img class="" style="width: 50vh;" src="/img/persona.jpg" alt="">
+            <img class="imgProducto" style="" src="<?php echo $Producto['Imagen']; ?>"  alt="">
         </div>
     </section>
 
     <section>
         <div class="row" >
-            <div class="col">
-                <p class="subtitle">Principio Activo</p>
+            <div class="col-8">
+                <p class="subtitle"><?php echo $Producto['PrincipioActivo']; ?></p>
             </div>
-            <div class="col text-end">
-                <p class="subtitle">9 piezas</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <p class="subtitle4">Función: ejemplo</p>
+            <div class="col-4 text-end">
+                <p class="subtitle"><?php echo $Producto['Existencia']; ?> piezas</p>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <p class="subtitle4">Laboratorio: ejemplo</p>
+                <p class="subtitle4">Función: <?php echo $Producto['Nombre']; ?></p>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <p class="subtitle4">Gramaje: ejemplo</p>
+                <p class="subtitle4">Laboratorio: <?php echo $Producto['Laboratorio']; ?></p>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <p class="subtitle4">Anaquel: ejemplo</p>
+                <p class="subtitle4">Gramaje: <?php echo $Producto['Gramaje']; ?></p>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <p class="subtitle4">Caducidad: ejemplo</p>
+                <p class="subtitle4">Anaquel: <?php echo $Producto['Anaquel']; ?></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <?php $fechaCaducidad = date('d-m-Y', strtotime($Producto['Caducidad'])); ?>
+                <p class="subtitle4">Caducidad: <?php echo $fechaCaducidad; ?></p>
             </div>
         </div>
         <hr class="mt-0 solid">

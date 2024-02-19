@@ -1,3 +1,8 @@
+<?php 
+    include('Components/ObtenerProductos.php');
+    include('Components/ObtenerClientes.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +32,9 @@
             font-size: 1.7em;
             overflow: hidden;
         }
+        .input-group input[type="number"] {
+        text-align: center;
+         }
     </style>
 
 </head>
@@ -51,33 +59,42 @@
         <form action="" >
             <div class="mb-2">
                     <label for="Producto" class="mb-0"> <h6 class="NombreComercialCard2">Producto</h6></label>
-                    <select class="form-select" id="Producto">
-                        <option selected>Seleccionar</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select" id="Producto" required>
+                        <option >Seleccionar</option>
+                        <?php 
+                            foreach($Productos as $Producto){
+                                $nombreComercial = strlen($Producto['NombreComercial']) > 35 ? substr($Producto['NombreComercial'], 0, 35) . '...' : $Producto['NombreComercial'];
+                            echo '<option value="'.$Producto["Med_ID"].'">'.$nombreComercial.'</option>';
+                        } ?>
                     </select>                
             </div>
             <div class="mb-2">
                 <label for="Cliente" class="mb-0"> <h6 class="NombreComercialCard2">Cliente</h6></label>
-                <select class="form-select" id="Cliente">
-                    <option selected>Seleccionar</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                <select class="form-select" id="Cliente" required>
+                    <option >Seleccionar</option>
+                    <?php 
+                            foreach($Clientes as $cliente){
+                                $ClienteNombre = $cliente['Nombre'].' '.$cliente['ApellidoPaterno'].' '.$cliente['ApellidoMaterno'];
+                                $ClienteNombre = strlen($ClienteNombre) > 35 ? substr($ClienteNombre, 0, 35) . '...' : $ClienteNombre;
+                            echo '<option value="'.$cliente["Cli_ID"].'">'.$ClienteNombre.'</option>';
+                        } ?>
                 </select>                
             </div>
             <div class="row mb-0 pb-0">
-                <div class="col">
+                <div class="col-5">
                     <label for="Cantidad" class="mb-0"> <h6 class="NombreComercialCard2">Cantidad</h6></label>
-                    <input type="number" class="form-control" name="Cantidad" id="Cantidad">
-                    <label for="Cantidad" class="mb-0 mt-1"> <p class="subtitle3">Disponibles: 9</p></label>
+                    <div class="input-group text-center">
+                        <button class="btn btn-outline-secondary controlCant" type="button" onclick="decrementarCantidad()">-</button>
+                        <input type="number" class="form-control numCant" name="Cantidad" id="Cantidad" value="1" min="1" required>
+                        <button class="btn btn-outline-secondary controlCant" type="button" onclick="incrementarCantidad()">+</button>
+                    </div>
+                    <label for="Cantidad" class="mb-0 mt-1"> <p class="subtitle3">Disponibles:  <span id="cantidadDisponible"></p></label>
                 </div>
                 <div class="col"></div>
                 <div class="col"></div>
             </div>
             <div class="col ps-0 text-end">
-                <button type="submit" class="btn btn-primary btnformulario3 rounded-pill ">
+                <button type="submit" class="btn  btnformulario3 rounded-pill ">
                     <p class="btntexto3 m-0 p-0">Crear</p>
                 </button>
             </div>
@@ -120,29 +137,100 @@
 
     </body>
     <script>
-        function showSweetAlert(funcion) {
-            Swal.fire({
-                title: 'Eliminar Función',
-                html: '¿Estás seguro de que deseas eliminar la función: <strong>' + funcion + '</strong>?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#e8677b',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Sí, eliminar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire(
-                        'Eliminado',
-                        'La función ha sido eliminada correctamente.',
-                        'success'
-                    );
-                    // Aquí puedes agregar la lógica para eliminar el elemento de la lista si es necesario
+        
+        function incrementarCantidad() {
+            var cantidadInput = document.getElementById("Cantidad");
+            var cantidad = parseInt(cantidadInput.value);
+            var disp = parseInt(document.getElementById("cantidadDisponible").textContent);
+            if (cantidad < disp) {
+                cantidadInput.value = cantidad + 1;
                 }
-            });
-    
-            // Devolver false para evitar que el enlace se siga ejecutando normalmente
-            return false;
         }
+
+        function decrementarCantidad() {
+            var cantidadInput = document.getElementById("Cantidad");
+            var cantidad = parseInt(cantidadInput.value);
+            if (cantidad > 1) {
+                cantidadInput.value = cantidad - 1;
+            }
+        }
+
+
+        document.getElementById("Producto").addEventListener("change", function() {
+            var productoSeleccionado = this.value;
+            var cantidadInicial = 1; // Establecer el valor inicial deseado aquí
+            // console.log(productoSeleccionado);
+            // Realizar una llamada AJAX a un script PHP para obtener la cantidad disponible
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var cantidadDisponible = parseInt(xhr.responseText);
+                        // Actualizar el contenido con la cantidad disponible devuelta por el servidor
+                        document.getElementById("Cantidad").setAttribute("max", cantidadDisponible);
+                        document.getElementById("cantidadDisponible").innerText = xhr.responseText;
+                        document.getElementById("Cantidad").value = cantidadInicial; // Reiniciar la cantidad
+                        // console.log(xhr.responseText);
+                    } else {
+                        // Manejar errores si es necesario
+                    }
+                }
+            };
+            xhr.open("GET", "/Components/ObtenerCantidadDisponible.php?id_producto=" + productoSeleccionado, true);
+            xhr.send();
+        });
+        
+
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evitar que el formulario se envíe automáticamente
+
+            var clienteSeleccionadoElement = document.getElementById('Cliente');
+            var clienteSeleccionado = clienteSeleccionadoElement.options[clienteSeleccionadoElement.selectedIndex].textContent;
+
+            var productoSeleccionadoElement = document.getElementById('Producto');
+            var productoSeleccionado = productoSeleccionadoElement.options[productoSeleccionadoElement.selectedIndex].textContent;
+           
+            var cantidadSeleccionada = document.getElementById('Cantidad').value;
+
+            // Verificar si se ha seleccionado un cliente y un producto
+            if (clienteSeleccionado !== 'Seleccionar' && productoSeleccionado !== 'Seleccionar') {
+                // Mostrar un cuadro de diálogo de confirmación
+                Swal.fire({
+                    title: '¿Confirmar transacción?',
+                    html: '<div style="text-align: left; font-size: smaller;">' +
+                            '<strong>Cliente:</strong> ' + clienteSeleccionado + '<br>' +
+                            '<strong>Producto:</strong> ' + productoSeleccionado + '<br>' +
+                            '<strong>Cantidad:</strong> ' + cantidadSeleccionada +
+                        '</div>',
+                    icon: 'info',
+                    showCancelButton: true,
+                    confirmButtonColor: '#e8677b',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, confirmar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Aquí puedes enviar el formulario o realizar cualquier acción adicional
+                        Swal.fire(
+                            '¡Listo!',
+                            'La transacción se ha creado correctamente.',
+                            'success'
+                        );
+                        setTimeout(() => {
+                        // Redirige al usuario al index después de 3 segundos
+                        window.location.href = '/index.php';
+                    }, 2000); // 3000 milisegundos = 3 segundos
+                    }
+                });
+            } else {
+                // Si no se han seleccionado cliente o producto, mostrar un mensaje de error
+                Swal.fire(
+                    'Error',
+                    'Por favor, seleccione un cliente y un producto.',
+                    'error'
+                );
+            }
+        });
+
     </script>
 </html>
