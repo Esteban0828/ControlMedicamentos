@@ -214,13 +214,19 @@ line-height: normal;
 
 .ultimacard{
     padding-bottom: 12% !important;
-    
 }
 
 .ultimacard2{
     padding-bottom: 12% !important;
     padding-top: 30% !important;
 }
+
+.ultimacard3{
+    padding-bottom: 12% !important;
+    padding-top: 18vh !important;
+}
+
+
 
 .header{
     background-color: #F5F6F8;
