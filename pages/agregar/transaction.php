@@ -56,10 +56,10 @@
     
     <section class="pt-4">
        
-        <form action="" >
+        <form action="/Components/RegistrarTransaccion.php" method="post">
             <div class="mb-2">
                     <label for="Producto" class="mb-0"> <h6 class="NombreComercialCard2">Producto</h6></label>
-                    <select class="form-select" id="Producto" required>
+                    <select class="form-select" id="Producto" name="Producto" required>
                         <option >Seleccionar</option>
                         <?php 
                             foreach($Productos as $Producto){
@@ -70,7 +70,7 @@
             </div>
             <div class="mb-2">
                 <label for="Cliente" class="mb-0"> <h6 class="NombreComercialCard2">Cliente</h6></label>
-                <select class="form-select" id="Cliente" required>
+                <select class="form-select" id="Cliente" name="Cliente" required>
                     <option >Seleccionar</option>
                     <?php 
                             foreach($Clientes as $cliente){
@@ -210,16 +210,36 @@
                     cancelButtonText: 'Cancelar'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        // Aquí puedes enviar el formulario o realizar cualquier acción adicional
-                        Swal.fire(
-                            '¡Listo!',
-                            'La transacción se ha creado correctamente.',
-                            'success'
-                        );
-                        setTimeout(() => {
-                        // Redirige al usuario al index después de 3 segundos
-                        window.location.href = '/index.php';
-                    }, 2000); // 3000 milisegundos = 3 segundos
+                        // Aquí se ejecuta el código cuando el usuario confirma la transacción
+                        // Realizar la llamada AJAX para enviar los datos al script PHP
+                        var xhr = new XMLHttpRequest();
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState === XMLHttpRequest.DONE) {
+                                if (xhr.status === 200) {
+                                    // Aquí puedes mostrar un mensaje de éxito si es necesario
+                                    Swal.fire(
+                                        '¡Transacción completada!',
+                                        'La transacción se ha registrado correctamente.',
+                                        'success'
+                                    );
+                                } else {
+                                    // Aquí puedes manejar los errores si la llamada al script PHP falla
+                                    Swal.fire(
+                                        'Error',
+                                        'Hubo un problema al procesar la transacción. Inténtalo de nuevo más tarde.',
+                                        'error'
+                                    );
+                                }
+                            }
+                        };
+                        xhr.open("POST", "/Components/RegistrarTransaccion.php", true);
+                        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                        // Aquí puedes enviar los datos necesarios al script PHP, como los valores de los selectores Producto y Cliente
+                        var productoSeleccionado = document.getElementById("Producto").value;
+                        var clienteSeleccionado = document.getElementById("Cliente").value;
+                        var cantidad = document.getElementById("Cantidad").value;
+                        var data = "Producto=" + encodeURIComponent(productoSeleccionado) + "&Cliente=" + encodeURIComponent(clienteSeleccionado) + "&Cantidad=" + encodeURIComponent(cantidad);
+                        xhr.send(data);
                     }
                 });
             } else {

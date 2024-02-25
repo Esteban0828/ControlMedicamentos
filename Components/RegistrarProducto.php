@@ -1,9 +1,9 @@
 <?php
 // Detalles de la conexión
-$servername = "sql5.freemysqlhosting.net";
-$username = "sql5682245";
-$password = "QU5YmpaNqv";
-$database = "sql5682245";
+$servername = "sql.freedb.tech";
+$username = "freedb_usuarioBD";
+$password = "bH366bfPMJbHc?v";
+$database = "freedb_MedControl";
 
 // $servername = "sql300.infinityfree.com";
 // $username = "if0_35963147";

@@ -61,39 +61,43 @@
         <hr class="mt-0 solid">
     </section>
 
+    <?php 
+    // Verificar si hay transacciones
+    if (empty($Transacciones)) {
+        echo "<p class='subtitle5'>No hay transacciones para este cliente.</p>";
+    } else {
+    ?>
     <section class="mt-0">
         <h5 class="subtitle">Transacciones</h5>
-       <?php if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        ?>
-        <div class="card" style="width: 100%;">
+        <?php 
+        foreach ($Transacciones as $transaccion): ?>
+        <div class="card mb-2" style="width: 100%;">
             <div class="ms-3">
-              <div class="row align-items-center  p-3">
-                <div class="col ms-0">
-                    <div class="row align-items-center">
-                        <div class="col fotoProducto"></div>
-                            <svg class="col" xmlns="http://www.w3.org/2000/svg" width="18" height="20" viewBox="0 0 18 20" fill="none">
-                                <path d="M17.6223 10.8828C18.1246 10.3945 18.1246 9.60156 17.6223 9.11328L11.1938 2.86328C10.6915 2.375 9.87589 2.375 9.37366 2.86328C8.87143 3.35156 8.87143 4.14453 9.37366 4.63281L13.6125 8.75H1.28571C0.574554 8.75 0 9.30859 0 10C0 10.6914 0.574554 11.25 1.28571 11.25H13.6085L9.37768 15.3672C8.87545 15.8555 8.87545 16.6484 9.37768 17.1367C9.87991 17.625 10.6955 17.625 11.1978 17.1367L17.6263 10.8867L17.6223 10.8828Z" fill="#F41F1F"/>
-                            </svg>
-                        
-                        <div class="col fotoCliente"></div>
+                <div class="row align-items-center  ps-3 pb-2 pt-2">
+                    <div class="col-2 ms-0">
+                        <div class="row align-items-center">
+                            <div class="m-0 p-0">
+                                <img class="fotoProducto5" src="<?php echo $transaccion['ImagenProducto']; ?>" alt="">
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <h6 class="NombreComercialCard mb-0"><?php echo $transaccion['NombreComercial']; ?></h6>
+                        <p class="subtituloCard m-0"><?php echo $transaccion['Fecha']; ?></p>
+                        <p class="subtituloCard2 m-0"><?php echo $transaccion['Cantidad']; ?> pzs.</p>
                     </div>
                 </div>
-                <div class="col">
-                    <h6 class="NombreComercialCard mb-0"><?php echo $row['NombreProducto']; ?></h6>
-                    <p class="subtituloCard m-0"><?php echo $row['Fecha']; ?></p>
-                    <p class="subtituloCard2 m-0"><?php echo $row['Cantidad']; ?> pzs.</p>
-                </div>
-              </div>
             </div>
-          </div>
+        </div>
         <?php
-    }
-} else {
-    // Si no hay resultados, imprimir un mensaje indicando que no hay transacciones
-    echo "<p class='subtitle5'>No hay transacciones para este cliente.</p>";
-} ?>
+        endforeach;
+        ?>
     </section>
+    <?php 
+    }
+    ?>
+
     
     
     <nav class="nav">

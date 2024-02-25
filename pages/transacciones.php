@@ -1,3 +1,7 @@
+<?php 
+    include('Components/ObtenerTransacciones.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,37 +11,53 @@
     <link rel="stylesheet" href="../Styles/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/90b70c7a3b.js" crossorigin="anonymous"></script>
 </head>
 <body class="">
-    <h1 class="title">Transacciones</h1>
+    
+    <div class="header fixed-top">
+        <h1 class="title">Transacciones</h1>
+
+    </div>
 
     
-    <section class="mt-4 ultimacard mb-5">
+    <section class="mt-4 ultimacard mb-5 espacio">
+        <?php foreach ($transacciones as $transaccion): ?>
+            <div class="card mb-3" style="width: 100%;">
+                <div class="ps-4">
+                    <div class="row align-items-center  p-3 ps-0">
+                        <div class="col ms-0">
+                            <div class="row align-items-start">
+                            <h6 class="NombreComercialCard p-0 pb-2 m-0"><?php echo $transaccion['NombreComercial']; ?></h6>
 
-        <div class="card mb-3" style="width: 100%;">
-            <div class="ms-3">
-              <div class="row align-items-center  p-3">
-                <div class="col ms-0">
-                    <div class="row align-items-center">
-                        <div class="col fotoProducto"></div>
-                            <svg class="col" xmlns="http://www.w3.org/2000/svg" width="18" height="20" viewBox="0 0 18 20" fill="none">
-                                <path d="M17.6223 10.8828C18.1246 10.3945 18.1246 9.60156 17.6223 9.11328L11.1938 2.86328C10.6915 2.375 9.87589 2.375 9.37366 2.86328C8.87143 3.35156 8.87143 4.14453 9.37366 4.63281L13.6125 8.75H1.28571C0.574554 8.75 0 9.30859 0 10C0 10.6914 0.574554 11.25 1.28571 11.25H13.6085L9.37768 15.3672C8.87545 15.8555 8.87545 16.6484 9.37768 17.1367C9.87991 17.625 10.6955 17.625 11.1978 17.1367L17.6263 10.8867L17.6223 10.8828Z" fill="#F41F1F"/>
-                            </svg>
-                        
-                        <div class="col fotoCliente"></div>
+                            </div>
+                            <div class="row gx-0 ms-0 align-items-center">
+                                <div class="col fotoProducto">
+                                    <img class="col fotoProducto4" src="<?php echo $transaccion['ImagenProducto']; ?>" alt="Producto">
+                                </div>
+                                <svg class="col" xmlns="http://www.w3.org/2000/svg" width="18" height="20" viewBox="0 0 18 20" fill="none">
+                                    <path d="M17.6223 10.8828C18.1246 10.3945 18.1246 9.60156 17.6223 9.11328L11.1938 2.86328C10.6915 2.375 9.87589 2.375 9.37366 2.86328C8.87143 3.35156 8.87143 4.14453 9.37366 4.63281L13.6125 8.75H1.28571C0.574554 8.75 0 9.30859 0 10C0 10.6914 0.574554 11.25 1.28571 11.25H13.6085L9.37768 15.3672C8.87545 15.8555 8.87545 16.6484 9.37768 17.1367C9.87991 17.625 10.6955 17.625 11.1978 17.1367L17.6263 10.8867L17.6223 10.8828Z" fill="#F41F1F"/>
+                                </svg>
+                                <div class="col fotoCliente">
+                                    <img class=" fotoCliente2" src="<?php echo $transaccion['ImagenCliente']; ?>" alt="Cliente">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <?php 
+                                 $Nombre = strlen($transaccion['Nombre']) > 13 ? substr($transaccion['Nombre'], 0, 13) . '...' : $transaccion['Nombre'];
+                                 $ApellidoPaterno = strlen($transaccion['ApellidoPaterno']) > 10 ? substr($transaccion['ApellidoPaterno'], 0, 10) . '...' : $transaccion['ApellidoPaterno'];
+                                 $Fecha = date('d-m-Y', strtotime($transaccion['Fecha']));
+
+                            ?>
+                            <p class="subtituloCard2 m-0"><i class="fa-solid fa-user"></i> <?php echo $Nombre. ' ' . $ApellidoPaterno; ?></p>
+                            <p class="subtituloCard m-0">Cantidad: <?php echo $transaccion['Cantidad']; ?> pzs.</p>
+                            <p class="subtituloCard m-0">Fecha: <?php echo $Fecha; ?></p>
+                        </div>
                     </div>
                 </div>
-                <div class="col">
-                    <h6 class="NombreComercialCard">NombreComercial</h6>
-                    <p class="subtituloCard m-0">Fecha</p>
-                    <p class="subtituloCard m-0">NombreCliente</p>
-                    <p class="subtituloCard2 m-0">9 pzs.</p>
-                </div>
-              </div>
             </div>
-          </div>
-  
-
+        <?php endforeach; ?>
     </section>
 
     <nav class="nav">

@@ -3,10 +3,10 @@
 //obtener Cantidad de transacciones
 try {
     // Detalles de la conexión
-    $servername = "sql5.freemysqlhosting.net";
-    $username = "sql5682245";
-    $password = "QU5YmpaNqv";
-    $database = "sql5682245";
+    $servername = "sql.freedb.tech";
+    $username = "freedb_usuarioBD";
+    $password = "bH366bfPMJbHc?v";
+    $database = "freedb_MedControl";
     // Establecemos una conexión con el servidor MySQL
     $conn = new mysqli($servername, $username, $password, $database);
     
@@ -37,10 +37,10 @@ try {
 //obtener Cantidad de Clientes
 try {
     // Detalles de la conexión
-    $servername = "sql5.freemysqlhosting.net";
-    $username = "sql5682245";
-    $password = "QU5YmpaNqv";
-    $database = "sql5682245";
+    $servername = "sql.freedb.tech";
+    $username = "freedb_usuarioBD";
+    $password = "bH366bfPMJbHc?v";
+    $database = "freedb_MedControl";
     // Establecemos una conexión con el servidor MySQL
     $conn = new mysqli($servername, $username, $password, $database);
     

@@ -16,7 +16,23 @@ try {
     }
     
     // Consulta SQL para obtener todos los datos de la tabla `Medicamentos`
-    $sql = "SELECT * FROM `Medicamentos`";
+    $sql = "SELECT
+    T.Tran_ID AS TransaccionID,
+    T.Cantidad,
+    M.Imagen AS ImagenProducto,
+    M.NombreComercial,
+    T.Fecha,
+    C.Nombre,
+    C.ApellidoPaterno,
+    C.ApellidoMaterno,
+    C.Imagen AS ImagenCliente
+    FROM
+    Transacciones T
+    INNER JOIN
+    Medicamentos M ON T.Med_ID = M.Med_ID
+    INNER JOIN
+    Clientes C ON T.Cli_ID = C.Cli_ID
+    ORDER BY T.Fecha DESC;";
     $result = $conn->query($sql);
 
     // Verificar si la consulta fue exitosa
@@ -25,7 +41,7 @@ try {
     }
 
     // Obtener todos los resultados de la consulta como un arreglo asociativo
-    $Productos = $result->fetch_all(MYSQLI_ASSOC);
+    $transacciones = $result->fetch_all(MYSQLI_ASSOC);
 
     
     // // Imprimir el resultado

@@ -4,10 +4,10 @@
 $id_cliente = $_GET['id'];
 
 // Detalles de la conexión
-$servername = "sql5.freemysqlhosting.net";
-$username = "sql5682245";
-$password = "QU5YmpaNqv";
-$database = "sql5682245";
+$servername = "sql.freedb.tech";
+$username = "freedb_usuarioBD";
+$password = "bH366bfPMJbHc?v";
+$database = "freedb_MedControl";
 // Establecemos una conexión con el servidor MySQL
 $conn = new mysqli($servername, $username, $password, $database);
 
@@ -33,7 +33,7 @@ Medicamentos M ON T.Med_ID = M.Med_ID
 INNER JOIN
 Clientes C ON T.Cli_ID = C.Cli_ID
 WHERE
-C.Cli_ID = '$id_cliente';";
+T.Cli_ID = '$id_cliente';";
 
 $result = $conn->query($sql);
 
@@ -42,7 +42,7 @@ if ($result === false) {
     echo "Error al ejecutar la consulta: " . $conn->error;
 } else {
     // Obtener los detalles del cliente
-    $Transacciones = $result->fetch_assoc();
+    $Transacciones = $result->fetch_all(MYSQLI_ASSOC);
 }
 
 // Cerrar la conexión
