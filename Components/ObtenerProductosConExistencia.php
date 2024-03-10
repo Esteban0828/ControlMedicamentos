@@ -15,7 +15,7 @@ try {
     }
     
     // Consulta SQL para obtener todos los datos de la tabla `Medicamentos`
-    $sql = "SELECT * FROM `Medicamentos`";
+    $sql = "SELECT * FROM `Medicamentos` WHERE Existencia > 0";
     $result = $conn->query($sql);
 
     // Verificar si la consulta fue exitosa

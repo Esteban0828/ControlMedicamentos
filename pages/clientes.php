@@ -8,14 +8,65 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
+<style>
+  .group {
+ display: flex;
+ line-height: 28px;
+ align-items: center;
+ position: relative;
+ max-width: 100%;
+  }
+
+  .input {
+  width: 100%;
+  height: 40px;
+  line-height: 28px;
+  padding: 0 1rem;
+  padding-left: 2.5rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  outline: none;
+  background-color: #e8e8e8;
+  color: #0d0c22;
+  transition: .3s ease;
+  }
+
+  .input::placeholder {
+  color: #9e9ea7;
+  }
+
+  .input:focus, input:hover {
+  outline: none !important;
+  border-color: rgba(234,76,137,0.4);
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgb(234 76 137 / 10%);
+  }
+
+  .icon {
+  position: absolute;
+  left: 1rem;
+  fill: #9e9ea7;
+  width: 1rem;
+  height: 1rem;
+  }
+
+</style>
 <body class="">
-    <div class="header fixed-top ">
-        <h1 class="title">Clientes</h1>
-
-    </div>
-
-    
-    <section class="mt-1 ultimacard2 mb-2">
+    <div class="header fixed-top">
+          <h1 class="title">Clientes</h1>
+          <section>
+            <div class="row">
+              <div class="col-12">
+      
+                <div class="group mb-3">
+                <svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><g><path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path></g></svg>
+                <input placeholder="Buscar" type="search" class="input" id="searchInput">
+              </div>
+              </div>
+            </div>
+          </section>
+  </div>
+    <section class="mt-4 ultimacard2 mb-4" style="margin-bottom: 15% !important; margin-top: 12% !important;">
 
     <?php 
     include('../Components/ObtenerClientes.php');
@@ -95,4 +146,21 @@
         </a>
       </nav>
 </body>
+
+<script>
+    document.getElementById("searchInput").addEventListener("input", function() {
+        var searchTerm = this.value.toLowerCase(); // Obtenemos el término de búsqueda en minúsculas
+
+        // Recorremos todos los elementos que deseas buscar
+        var cards = document.querySelectorAll(".card");
+        cards.forEach(function(card) {
+            var productName = card.querySelector(".NombreComercialCard2").textContent.toLowerCase(); // Obtenemos el nombre del producto
+            if (productName.includes(searchTerm)) {
+                card.style.display = "block"; // Mostramos el producto si coincide con el término de búsqueda
+            } else {
+                card.style.display = "none"; // Ocultamos el producto si no coincide con el término de búsqueda
+            }
+        });
+    });
+</script>
 </html>

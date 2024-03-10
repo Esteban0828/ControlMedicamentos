@@ -76,8 +76,8 @@
         $id_Funcion = $Funcion['Fun_ID']; // Ajusta el nombre del campo según la estructura de tu tabla ?>
 
             <li class="list-group-item d-flex justify-content-between align-items-center mb-2 rounded-top rounded-bottom">
-            <p class="p-0 m-0 NombreComercialCard2"><?php echo $Funcion['Nombre'];?></p>
-            <i class="fa-solid fa-trash" style="color: #e8677b;" onclick="return showSweetAlert('<?php echo $Funcion['Nombre'] ?>')"></i>
+            <p class="p-0 m-0 NombreComercialCard2" onclick="mostrarDetalles('<?php echo $Funcion['Fun_ID']; ?>')"><?php echo $Funcion['Nombre']; ?></p>
+            <i class="fa-solid fa-trash" style="color: #e8677b;" onclick="return showSweetAlert('<?php echo $Funcion['Fun_ID']; ?>', '<?php echo $Funcion['Nombre']; ?>')"></i>
             </li>
 
             <?php }; ?>
@@ -124,29 +124,50 @@
 
     </body>
     <script>
-        function showSweetAlert(funcion) {
-            Swal.fire({
-                title: 'Eliminar Función',
-                html: '¿Estás seguro de que deseas eliminar la función: <strong>' + funcion + '</strong>?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#e8677b',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Sí, eliminar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire(
-                        'Eliminado',
-                        'La función ha sido eliminada correctamente.',
-                        'success'
-                    );
-                    // Aquí puedes agregar la lógica para eliminar el elemento de la lista si es necesario
-                }
-            });
-    
-            // Devolver false para evitar que el enlace se siga ejecutando normalmente
-            return false;
+
+
+function mostrarDetalles(idFuncion) {
+        // Aquí puedes hacer lo que necesites con el ID de la función seleccionada,
+        // como redireccionar a una página de detalles o abrir un modal con más información.
+        console.log('Función seleccionada:', idFuncion);
+    }
+    function showSweetAlert(idFuncion, nombreFuncion) {
+    Swal.fire({
+        title: 'Eliminar Función',
+        html: '¿Estás seguro de que deseas eliminar la función: <strong>' + nombreFuncion + '</strong>?<br><br> Esto afectará a los medicamentos previamente registrados con esta función.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#e8677b',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Crear un formulario dinámico
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/Components/EliminarFuncion.php';
+            
+            // Crear un input oculto para enviar el ID de la función
+            const inputIdFuncion = document.createElement('input');
+            inputIdFuncion.type = 'hidden';
+            inputIdFuncion.name = 'idFuncion';
+            inputIdFuncion.value = idFuncion;
+            
+            // Agregar el input al formulario
+            form.appendChild(inputIdFuncion);
+            
+            // Agregar el formulario al cuerpo del documento y enviarlo
+            document.body.appendChild(form);
+            form.submit();
         }
-    </script>
+    });
+
+    // Devolver false para evitar que el enlace se siga ejecutando normalmente
+    return false;
+}
+
+</script>
+
+
 </html>

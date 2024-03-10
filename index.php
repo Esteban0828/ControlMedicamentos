@@ -1,4 +1,8 @@
-<?php include('./Components/ObtenerCantidades.php') ?>
+<?php 
+include('./Components/ObtenerCantidades.php');
+include('./Components/ObtenerUltimaTransaccion.php');
+include('./Components/ObtenerProductosRecientes.php');
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -70,20 +74,30 @@
             <div class="ms-3">
               <div class="row align-items-center  p-3">
                 <div class="col ms-0">
-                    <div class="row align-items-center">
-                        <div class="col fotoProducto"></div>
+                    <div class="row gx-0 ms-0  align-items-center">
+                        <div class="col fotoProducto">
+                        <img class="col fotoProducto4" src="<?php echo $ultima_transaccion['ImagenProducto']; ?>" alt="Producto">
+                        </div>
                             <svg class="col" xmlns="http://www.w3.org/2000/svg" width="18" height="20" viewBox="0 0 18 20" fill="none">
                                 <path d="M17.6223 10.8828C18.1246 10.3945 18.1246 9.60156 17.6223 9.11328L11.1938 2.86328C10.6915 2.375 9.87589 2.375 9.37366 2.86328C8.87143 3.35156 8.87143 4.14453 9.37366 4.63281L13.6125 8.75H1.28571C0.574554 8.75 0 9.30859 0 10C0 10.6914 0.574554 11.25 1.28571 11.25H13.6085L9.37768 15.3672C8.87545 15.8555 8.87545 16.6484 9.37768 17.1367C9.87991 17.625 10.6955 17.625 11.1978 17.1367L17.6263 10.8867L17.6223 10.8828Z" fill="#F41F1F"/>
                             </svg>
                         
-                        <div class="col fotoCliente"></div>
+                        <div class="col fotoCliente">
+                        <img class=" fotoCliente2" src="<?php echo $ultima_transaccion['ImagenCliente']; ?>" alt="Cliente">
+                        </div>
                     </div>
                 </div>
                 <div class="col">
-                    <h6 class="NombreComercialCard">NombreComercial</h6>
-                    <p class="subtituloCard m-0">Fecha</p>
-                    <p class="subtituloCard m-0">NombreCliente</p>
-                    <p class="subtituloCard2 m-0">9 pzs.</p>
+                    <?php 
+                        $Nombre = strlen($ultima_transaccion['Nombre']) > 13 ? substr($ultima_transaccion['Nombre'], 0, 13) . '...' : $ultima_transaccion['Nombre'];
+                        $ApellidoPaterno = strlen($ultima_transaccion['ApellidoPaterno']) > 10 ? substr($ultima_transaccion['ApellidoPaterno'], 0, 10) . '...' : $ultima_transaccion['ApellidoPaterno'];
+                        $Fecha = date('d-m-Y', strtotime($ultima_transaccion['Fecha']));
+
+                     ?>
+                    <h6 class="NombreComercialCard"><?php echo $ultima_transaccion['NombreComercial']; ?></h6>
+                    <p class="subtituloCard m-0"><?php echo $Fecha; ?></p>
+                    <p class="subtituloCard m-0"><?php echo $Nombre. ' ' . $ApellidoPaterno; ?></p>
+                    <p class="subtituloCard2 m-0"><?php echo $ultima_transaccion['Cantidad']; ?> pzs.</p>
                 </div>
               </div>
             </div>
@@ -101,7 +115,39 @@
           </div>
         </div>
 
-        <a href="./pages/vistas/vistaProducto.html" class="text-decoration-none">
+        <?php foreach ($ProductosRecientes as $Producto) { 
+              $id_Producto = $Producto['Med_ID']; // Ajusta el nombre del campo según la estructura de tu tabla
+              $url = "./vistas/vistaProducto.php?id=" . $id_Producto;
+        ?>
+          
+        <a href="<?php echo $url; ?>" class="text-decoration-none">
+            <div class="card mb-3" style="width: 100%;">
+                <div class="ms-3">
+                    <div class="row align-items-center ps-1 pt-3 pe-1 pb-3">
+                        <div class="col-4 col-md-1 pe-0">
+                            <div class=" pe-0">
+                            <img class="fotoProducto2" src="<?php echo $Producto['Imagen']; ?>" alt="">
+                            </div>
+                        </div>
+                        <?php
+                                $nombreComercial = strlen($Producto['NombreComercial']) > 18 ? substr($Producto['NombreComercial'], 0, 18) . '...' : $Producto['NombreComercial'];
+                                $PrincipioActivo = strlen($Producto['PrincipioActivo']) > 10 ? substr($Producto['PrincipioActivo'], 0, 10) . '...' : $Producto['PrincipioActivo'];
+                                $Laboratorio = strlen($Producto['Laboratorio']) > 26 ? substr($Producto['Laboratorio'], 0, 26) . '...' : $Producto['Laboratorio'];
+                                $fechaCaducidad = date('d-m-Y', strtotime($Producto['Caducidad']));
+                        ?>
+                        <div class="col-8 col-md ps-0">
+                            <h6 class="NombreComercialCard2 mb-0"><?php echo $nombreComercial; ?></h6>
+                            <p class="subtituloCardProducto m-0"><?php echo $Laboratorio; ?></p>
+                            <p class="subtituloCardProducto m-0"><?php echo $fechaCaducidad; ?> | <?php echo $Producto['Anaquel']; ?></p>
+                            <p class="subtituloCardProducto2 m-0"><?php echo $Producto['Existencia']; ?> pzs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    <?php } ?>
+
+        <!-- <a href="./pages/vistas/vistaProducto.html" class="text-decoration-none">
             <div class="card mb-3" style="width: 100%;">
                 <div class="ms-3">
                     <div class="row align-items-center ps-1 pt-3 pe-1 pb-3">
@@ -117,10 +163,7 @@
                     </div>
                 </div>
             </div>
-        </a>
-        
-      
-       
+        </a> --> 
     </section>
 
     <nav class="nav">
@@ -182,8 +225,8 @@
         }
 
         // Verificar si el parámetro 'registro_producto' está presente en la URL
-        var registroExitoso = getParameterByName('registro_producto');
-        if (registroExitoso === 'true') {
+        var registroExitoso2 = getParameterByName('registro_exitoso2');
+        if (registroExitoso2 === 'true') {
             // Mostrar una alerta de SweetAlert
             Swal.fire({
                 icon: 'success',

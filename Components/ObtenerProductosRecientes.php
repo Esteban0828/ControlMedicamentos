@@ -14,8 +14,8 @@ try {
         die("Conexión fallida: " . $conn->connect_error);
     }
     
-    // Consulta SQL para obtener todos los datos de la tabla `Medicamentos`
-    $sql = "SELECT * FROM `Medicamentos`";
+    // Consulta SQL para obtener los 3 productos más recientes agregados
+    $sql = "SELECT * FROM `Medicamentos` ORDER BY FechaCreacion DESC LIMIT 2";
     $result = $conn->query($sql);
 
     // Verificar si la consulta fue exitosa
@@ -24,16 +24,13 @@ try {
     }
 
     // Obtener todos los resultados de la consulta como un arreglo asociativo
-    $Productos = $result->fetch_all(MYSQLI_ASSOC);
-
+    $ProductosRecientes = $result->fetch_all(MYSQLI_ASSOC);
     
-    // // Imprimir el resultado
-    // echo "El número de filas en la tabla Funciones es: " . $count;
-    } catch (Exception $e) {
-        echo "Hubo un problema: " . $e->getMessage();
-    }
+} catch (Exception $e) {
+    echo "Hubo un problema: " . $e->getMessage();
+}
 
+// Cerrar la conexión
+$conn->close();
 
-    // Cerrar la conexión
-    $conn->close();
 ?>

@@ -48,7 +48,7 @@
     
     <section class="pt-4">
        
-        <form action="/Components/RegistrarProducto.php" method="post" enctype="multipart/form-data">
+        <form action="/Components/RegistrarProducto.php" method="post" enctype="multipart/form-data"  onsubmit="return validar()">
             <div class="mb-2">
                 <label for="NombreComercial" class="mb-0"> <h6 class="NombreComercialCard2">Nombre Comercial</h6></label>
                 <input type="text" class="form-control" name="NombreComercial" id="NombreComercial">
@@ -64,7 +64,7 @@
             <div class="row mb-2">
                 <div class="col">
                     <label for="Funcion" class="mb-0"> <h6 class="NombreComercialCard2">Función</h6></label>
-                    <select class="form-select" name="Funcion">
+                    <select class="form-select" name="Funcion" id="Funcion">
                         <option selected>Seleccionar</option>
                         <?php 
                         include('Components/ObtenerFunciones.php');
@@ -98,7 +98,7 @@
                 </div>
             </div>
             <div class="text-end pt-3">
-                <button type="submit" class="btn btn-primary btnformulario2 rounded-pill ">
+                <button type="submit" id="btnAgregar" class="btn btn-primary btnformulario2 rounded-pill ">
                     <p class="btntexto2 m-0 p-0">Agregar</p>
                 </button>
             </div>
@@ -144,30 +144,71 @@
 
 
     </body>
+
     <script>
-        function showSweetAlert(funcion) {
-            Swal.fire({
-                title: 'Eliminar Función',
-                html: '¿Estás seguro de que deseas eliminar la función: <strong>' + funcion + '</strong>?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#e8677b',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Sí, eliminar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire(
-                        'Eliminado',
-                        'La función ha sido eliminada correctamente.',
-                        'success'
-                    );
-                    // Aquí puedes agregar la lógica para eliminar el elemento de la lista si es necesario
-                }
-            });
-    
-            // Devolver false para evitar que el enlace se siga ejecutando normalmente
-            return false;
+        // Función para validar el formulario antes de enviarlo
+        function validar() {
+            // Obtener los valores de los campos del formulario
+            var nombreComercial = document.getElementById('NombreComercial').value;  
+            var principioActivo = document.getElementById('PrincipioActivo').value;
+            var laboratorio = document.getElementById('Laboratorio').value;
+            var funcion = document.getElementById('Funcion').value;
+            var caducidad = document.getElementById('Caducidad').value;
+            var imagen = document.getElementById('Imagen').value;
+            var gramaje = document.getElementById('Gramaje').value;
+            var cantidad = document.getElementById('Cantidad').value;
+            var anaquel = document.getElementById('Anaquel').value;
+
+            // Obtener el archivo de imagen seleccionado
+            var imagenInput = document.getElementById('Imagen');
+            var imagenArchivo = imagenInput.files[0];
+
+            // Verificar si algún campo está vacío o si la imagen no ha sido seleccionada
+            if (nombreComercial == "" || principioActivo == "" || laboratorio == "" || funcion == "Seleccionar"|| caducidad == "" || gramaje == "" || cantidad == "" || anaquel == "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Por favor, completa todos los campos antes de enviar el formulario.'
+                });
+                return false; // Detener el envío del formulario
+            }
+
+            // Verificar el tipo y tamaño de la imagen
+            var tiposPermitidos = ['image/gif', 'image/jpeg', 'image/jpg', 'image/png', 'image/avif'];
+            if (!tiposPermitidos.includes(imagenArchivo.type) || imagenArchivo.size > 2000000) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'El archivo de imagen debe ser de tipo GIF, JPEG, JPG o PNG y no debe superar los 2MB.'
+                });
+                return false; // Detener el envío del formulario
+            }
+
+            // Permitir el envío del formulario si todos los campos están llenos y la imagen es válida
+            return true;
         }
     </script>
+
+
+
+    <!-- <script>
+        document.getElementById("btnAgregar").addEventListener("submit", function(event) {
+            event.preventDefault(); // Evita que el formulario se envíe automáticamente
+            var nombreProducto = document.getElementById("NombreComercial").value; // Obtén el valor del campo Nombre del producto
+            showSweetAlert(nombreProducto); // Llama a la función showSweetAlert con el valor obtenido
+        });
+
+        function showSweetAlert(nombreProducto) {
+            Swal.fire({
+                title: 'Producto agregado',
+                text: 'Se ha agregado el producto: ' + nombreProducto,
+                icon: 'success',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+            });
+        }
+    </script> -->
+
+
+   
 </html>

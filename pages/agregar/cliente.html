@@ -49,7 +49,7 @@
     
     <section class="pt-4">
        
-        <form action="/Components/registrarCliente.php" method="post" enctype="multipart/form-data">
+        <form action="/Components/registrarCliente.php" method="post" enctype="multipart/form-data" onsubmit="return validar()">
             <div class="mb-2">
                 <label for="Nombre" class="mb-0"> <h6 class="NombreComercialCard2">Nombre</h6></label>
                 <input type="text" class="form-control" name="Nombre" id="Nombre">
@@ -110,29 +110,48 @@
 
     </body>
     <script>
-        function showSweetAlert(funcion) {
-            Swal.fire({
-                title: 'Eliminar Función',
-                html: '¿Estás seguro de que deseas eliminar la función: <strong>' + funcion + '</strong>?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#e8677b',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Sí, eliminar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire(
-                        'Eliminado',
-                        'La función ha sido eliminada correctamente.',
-                        'success'
-                    );
-                    // Aquí puedes agregar la lógica para eliminar el elemento de la lista si es necesario
-                }
-            });
-    
-            // Devolver false para evitar que el enlace se siga ejecutando normalmente
-            return false;
+        // Función para validar el formulario antes de enviarlo
+        function validar() {
+            // Obtener los valores de los campos del formulario
+            var Nombre = document.getElementById('Nombre').value;  
+            var ApellidoP = document.getElementById('ApellidoP').value;
+            var ApellidoM = document.getElementById('ApellidoM').value;
+            var imagen = document.getElementById('Imagen').value;
+
+            // Obtener el archivo de imagen seleccionado
+            var imagenInput = document.getElementById('Imagen');
+            var imagenArchivo = imagenInput.files[0];
+
+            // Verificar si algún campo está vacío o si la imagen no ha sido seleccionada
+            if (Nombre == "" || ApellidoP == "" || ApellidoM == "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Por favor, completa todos los campos antes de enviar el formulario.'
+                });
+                return false; // Detener el envío del formulario
+            }
+
+            // Verificar el tipo y tamaño de la imagen
+            // var tiposPermitidos = ['image/gif', 'image/jpeg', 'image/jpg', 'image/png', 'image/avif'];
+            // if (!tiposPermitidos.includes(imagenArchivo.type) || imagenArchivo.size > 2000000) {
+            //     Swal.fire({
+            //         icon: 'error',
+            //         title: 'Error',
+            //         text: 'El archivo de imagen debe ser de tipo GIF, JPEG, JPG o PNG y no debe superar los 2MB.'
+            //     });
+            //     return false; // Detener el envío del formulario
+            // }
+
+            // Permitir el envío del formulario si todos los campos están llenos y la imagen es válida
+            return true;
         }
+
+        function redireccionarAlIndex() {
+        window.location.href = "/index.php";
+        }
+
     </script>
+
+    
 </html>

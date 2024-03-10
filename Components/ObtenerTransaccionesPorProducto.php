@@ -1,7 +1,7 @@
 <?php
 
 // Obtener el ID del cliente de la URL
-$id_cliente = $_GET['id'];
+$id_producto = $_GET['id'];
 
 // Detalles de la conexión
 $servername = "sql.freedb.tech";
@@ -24,6 +24,7 @@ M.Imagen AS ImagenProducto,
 M.NombreComercial,
 T.Fecha,
 C.Nombre,
+C.Cli_ID,
 C.ApellidoPaterno,
 C.ApellidoMaterno,
 C.Imagen AS ImagenCliente
@@ -34,7 +35,7 @@ Medicamentos M ON T.Med_ID = M.Med_ID
 INNER JOIN
 Clientes C ON T.Cli_ID = C.Cli_ID
 WHERE
-T.Cli_ID = '$id_cliente';";
+M.Med_ID = '$id_producto';";
 
 $result = $conn->query($sql);
 

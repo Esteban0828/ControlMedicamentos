@@ -1,5 +1,5 @@
 <?php 
-    include('Components/ObtenerProductos.php');
+    include('Components/ObtenerProductosConExistencia.php');
     include('Components/ObtenerClientes.php');
 ?>
 
@@ -60,7 +60,7 @@
             <div class="mb-2">
                     <label for="Producto" class="mb-0"> <h6 class="NombreComercialCard2">Producto</h6></label>
                     <select class="form-select" id="Producto" name="Producto" required>
-                        <option >Seleccionar</option>
+                        <option >-- Seleccionar --</option>
                         <?php 
                             foreach($Productos as $Producto){
                                 $nombreComercial = strlen($Producto['NombreComercial']) > 35 ? substr($Producto['NombreComercial'], 0, 35) . '...' : $Producto['NombreComercial'];
@@ -71,7 +71,7 @@
             <div class="mb-2">
                 <label for="Cliente" class="mb-0"> <h6 class="NombreComercialCard2">Cliente</h6></label>
                 <select class="form-select" id="Cliente" name="Cliente" required>
-                    <option >Seleccionar</option>
+                    <option >-- Seleccionar --</option>
                     <?php 
                             foreach($Clientes as $cliente){
                                 $ClienteNombre = $cliente['Nombre'].' '.$cliente['ApellidoPaterno'].' '.$cliente['ApellidoMaterno'];
@@ -193,7 +193,7 @@
             var cantidadSeleccionada = document.getElementById('Cantidad').value;
 
             // Verificar si se ha seleccionado un cliente y un producto
-            if (clienteSeleccionado !== 'Seleccionar' && productoSeleccionado !== 'Seleccionar') {
+            if (clienteSeleccionado !== '-- Seleccionar --' && productoSeleccionado !== '-- Seleccionar --') {
                 // Mostrar un cuadro de diálogo de confirmación
                 Swal.fire({
                     title: '¿Confirmar transacción?',
@@ -217,11 +217,12 @@
                             if (xhr.readyState === XMLHttpRequest.DONE) {
                                 if (xhr.status === 200) {
                                     // Aquí puedes mostrar un mensaje de éxito si es necesario
-                                    Swal.fire(
-                                        '¡Transacción completada!',
-                                        'La transacción se ha registrado correctamente.',
-                                        'success'
-                                    );
+                                    Swal.fire({
+                                        title:'¡Transacción completada!',
+                                        text:'La transacción se ha registrado correctamente.',
+                                        icon:'success',
+                                        didClose: redireccionarAlIndex
+                                });
                                 } else {
                                     // Aquí puedes manejar los errores si la llamada al script PHP falla
                                     Swal.fire(
@@ -247,10 +248,13 @@
                 Swal.fire(
                     'Error',
                     'Por favor, seleccione un cliente y un producto.',
-                    'error'
+                    'error',
                 );
             }
         });
 
+        function redireccionarAlIndex() {
+        window.location.href = "/index.php";
+        }
     </script>
 </html>

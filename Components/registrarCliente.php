@@ -29,7 +29,7 @@ if (isset($archivo) && $archivo != "") {
     $tamano = $_FILES['Imagen']['size'];
     $temp = $_FILES['Imagen']['tmp_name'];
     //Se comprueba si el archivo a cargar es correcto observando su extensión y tamaño
-    if (!((strpos($tipo, "gif") || strpos($tipo, "jpeg") || strpos($tipo, "jpg") || strpos($tipo, "png")) && ($tamano < 2000000))) {
+    if (!((strpos($tipo, "gif") || strpos($tipo, "jpeg") || strpos($tipo, "jpg") || strpos($tipo, "png") || strpos($tipo, "avif")) && ($tamano < 2000000))) {
         echo '<div><b>Error. La extensión o el tamaño de los archivos no es correcta.<br/>
         - Se permiten archivos .gif, .jpg, .png. y de 200 kb como máximo.</b></div>';
     } else {
@@ -51,14 +51,13 @@ if (isset($archivo) && $archivo != "") {
         }
     }
 }else{
-    $imagen = "../images/Persona.jpg";
+    $imagen = "/images/Persona.jpg";
     $sql = "INSERT INTO Clientes (Nombre, ApellidoPaterno, ApellidoMaterno, Imagen) VALUES ('$nombre', '$apellidoP', '$apellidoM','$imagen')";
 
 }
 
 // Ejecutar la consulta y verificar si fue exitosa
 if ($sql != "" && $conn->query($sql) === TRUE) {
-    echo "Cliente registrado exitosamente";
     header("Location: /index.php?registro_exitoso=true");
     exit();
 } elseif ($sql != "") {

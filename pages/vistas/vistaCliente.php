@@ -31,65 +31,75 @@
         </style>
 </head>
 <body class="">
-    <section>
-        <div class="row align-items-center">
-            <div class="col-auto mt-3">
-                <a href="#" onclick="history.back(); return false;">
-                    <i class="fa-solid fa-arrow-left icono-flecha"></i>
-                </a>
-            </div>
-            <div class="col">
-                <h1 class="titleMini ms-0">Cliente</h1>
-            </div>
-        </div>
-    </section>
-    
-    <section>
-        <div class="container pb-3 contenedor-imagen">
-            <img class="imagenUsuario"  src="<?php echo $cliente['Imagen']; ?>" alt="">
-        </div>
-    </section>
+    <section class="m-0 p-0  fixed-top fondoClienteVista">
 
-    <section>
-        <div class="row align-items-center">
-            <div class="col text-center">
-                <p class="subtitle"><?php echo $cliente['Nombre'].' '. $cliente['ApellidoPaterno'].' '. $cliente['ApellidoMaterno']; ?></p>
+        <section>
+            <div class="row align-items-center">
+                <div class="col-auto mt-3">
+                    <a href="#" onclick="history.back(); return false;">
+                        <i class="fa-solid fa-arrow-left icono-flecha"></i>
+                    </a>
+                </div>
+                <div class="col">
+                    <h1 class="titleMini ms-0">Cliente</h1>
+                </div>
             </div>
-        </div>
+        </section>
         
-       
-        <hr class="mt-0 solid">
+        <section>
+            <div class="container pb-3 contenedor-imagen">
+                <img class="imagenUsuario"  src="<?php echo $cliente['Imagen']; ?>" alt="">
+            </div>
+        </section>
+    
+        <section>
+            <div class="row align-items-center">
+                <div class="col text-center">
+                    <p class="subtitle"><?php echo $cliente['Nombre'].' '. $cliente['ApellidoPaterno'].' '. $cliente['ApellidoMaterno']; ?></p>
+                </div>
+            </div>
+            
+           
+            <hr class="mt-0 solid">
+            <h5 class="subtitle">Transacciones</h5>
+        </section>
     </section>
 
     <?php 
     // Verificar si hay transacciones
     if (empty($Transacciones)) {
-        echo "<p class='subtitle5'>No hay transacciones para este cliente.</p>";
+        echo "<p class='subtitle5 ms-5'>No hay transacciones para este cliente.</p>";
     } else {
     ?>
-    <section class="mt-0">
-        <h5 class="subtitle">Transacciones</h5>
+    <section class=" tarjetasTranCliente">
         <?php 
-        foreach ($Transacciones as $transaccion): ?>
-        <div class="card mb-2" style="width: 100%;">
-            <div class="ms-3">
-                <div class="row align-items-center  ps-3 pb-2 pt-2">
-                    <div class="col-2 ms-0">
-                        <div class="row align-items-center">
-                            <div class="m-0 p-0">
-                                <img class="fotoProducto5" src="<?php echo $transaccion['ImagenProducto']; ?>" alt="">
+        foreach ($Transacciones as $transaccion): 
+            $id_Producto = $transaccion['Med_ID']; // Ajusta el nombre del campo según la estructura de tu tabla
+            $url = "./vistaProducto.php?id=" . $id_Producto;
+            $fecha = date('d-m-Y', strtotime($transaccion['Fecha']));
+
+            ?>
+        <a href="<?php echo $url; ?>" class="text-decoration-none">
+            <div class="card mb-2" style="width: 100%;">
+                <div class="ms-3">
+                    <div class="row align-items-center  ps-3 pb-2 pt-2">
+                        <div class="col-2 ms-0">
+                            <div class="row align-items-center">
+                                <div class="m-0 p-0">
+                                    <img class="fotoProducto5" src="<?php echo $transaccion['ImagenProducto']; ?>" alt="">
+                                </div>
+                                
                             </div>
-                            
                         </div>
-                    </div>
-                    <div class="col-10">
-                        <h6 class="NombreComercialCard mb-0"><?php echo $transaccion['NombreComercial']; ?></h6>
-                        <p class="subtituloCard m-0"><?php echo $transaccion['Fecha']; ?></p>
-                        <p class="subtituloCard2 m-0"><?php echo $transaccion['Cantidad']; ?> pzs.</p>
+                        <div class="col-10">
+                            <h6 class="NombreComercialCard mb-0"><?php echo $transaccion['NombreComercial']; ?></h6>
+                            <p class="subtituloCard m-0"><?php echo $fecha; ?></p>
+                            <p class="subtituloCard2 m-0"><?php echo $transaccion['Cantidad']; ?> pzs.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
         <?php
         endforeach;
         ?>
